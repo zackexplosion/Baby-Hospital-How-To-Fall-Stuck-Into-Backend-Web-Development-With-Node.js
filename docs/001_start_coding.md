@@ -3,11 +3,13 @@
 Before we code anything else about baby, we need to think 
 
 * What is a baby?
+  * A baby model should able to carry information about a individual baby.
 * When will you enter the baby's information to the system?
   * I would like to enter the baby's information right after they born.
   * So some of information may not be available at that time.
 * What information should a baby carried?
   * For example, we want to storage those information which depends on A baby.
+    * birthAt (*)
     * gender (*)
     * weight (*)
     * name
@@ -21,6 +23,7 @@ Before we code anything else about baby, we need to think
 ## Here is the Baby schema
 ```javascript
 {
+  birthAt: "11/04/2024", //  Date Object * but String here for demo purposes
   gender: '', // String *
   weight: '', // Number *
   name: '', // String
@@ -69,6 +72,7 @@ And use Postman to do the request too.
 ### WTF? Someone hacked me?
 
 Why a baby can having no gender?
+How can a baby without birthday?
 
 
 ![](https://github.com/zackexplosion/Baby-Hospital/blob/main/screenshots/002.jpg?raw=true)
