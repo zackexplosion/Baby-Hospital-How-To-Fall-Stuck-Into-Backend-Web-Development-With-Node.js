@@ -2,7 +2,9 @@ const express = require('express')
 const app = express()
 const port = 1145
 
-
+// This is for express to handle request with json payload
+// If without this, req.body will be empty.
+// https://expressjs.com/en/api.html#express.json
 app.use(express.json())
 
 app.get('/', (req, res) => {
