@@ -3,6 +3,8 @@ const app = express()
 const port = 1145
 
 
+app.use(express.json())
+
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
@@ -11,7 +13,9 @@ app.get('/', (req, res) => {
 var BABY = []
 
 app.post('/api/baby', (req, res) => {
-  var baby = req.body 
+  var baby = req.body
+
+  console.log(req.body)
   BABY.push(baby)
   res.json(baby)
 })
