@@ -6,19 +6,7 @@
       <a-form
         :model="newBabyFormState"
         :label-col="labelCol"
-        :wrapper-col="wrapperCol"
       >
-        <!-- <a-form-item label="Instant delivery">
-          <a-switch v-model:checked="newBabyFormState.delivery" />
-        </a-form-item> -->
-        <!-- <a-form-item label="Activity type">
-          <a-checkbox-group v-model:value="newBabyFormState.type">
-            <a-checkbox value="1" name="type">Online</a-checkbox>
-            <a-checkbox value="2" name="type">Promotion</a-checkbox>
-            <a-checkbox value="3" name="type">Offline</a-checkbox>
-          </a-checkbox-group>
-        </a-form-item> -->
-
         <a-form-item
           label="Birth Time"
           name="birthAt"
@@ -76,17 +64,10 @@
 
 <script setup>
 import { toRaw } from "vue";
-
-// const onSubmit = () => {
-//   console.log('submit!', toRaw(formState));
-// };
 const labelCol = {
   style: {
     width: "150px",
   },
-};
-const wrapperCol = {
-  span: 14,
 };
 </script>
 

@@ -15,7 +15,7 @@ And someone already finished the Front End code, you just need to finish the Bac
 
 You can just run the command `npm install && npm run dev` with this project to see the final result.
 
-But I suggest you to create a new empty directory then follow the instructions.
+After that, I suggest you to remove the every file and directory in `backend` then follow the instructions.
 
 So for now...the system will able to....
 

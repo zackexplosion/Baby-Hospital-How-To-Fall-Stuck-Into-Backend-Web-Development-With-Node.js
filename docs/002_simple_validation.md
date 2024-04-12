@@ -89,13 +89,13 @@ app.post('/api/baby', (req, res) => {
 
 # Summary
 
-So far, our system should able to check the input date simply, but you must found a issue right now.
+So far, our system should able to check the input data simply, but you must found a issue right now.
 
 Why every time I changed the source code and restart the app, all baby were gone?
 
 We even not finished the delete function yet lol.
 
-Because currently, our baby table just storage with the BABY variable which only lives while whole application alive, when you restart the app, it means all data with application lifecycle will be erased.
+Because our baby table just storage with the BABY variable currently, which only lives while application alive, when you restart the app, it means all data within application lifecycle will be erased.
 
 That's why we need a [Database](./003_connect_to_database.md)! to storage our baby table!
 
