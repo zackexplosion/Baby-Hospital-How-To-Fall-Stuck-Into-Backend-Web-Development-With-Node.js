@@ -41,7 +41,6 @@ So create a new directory go into then run the following command to install the 
 
 `npm install --save express`
 
-
 Then create `index.js` and use the hello world example at first
 
 ```javascript

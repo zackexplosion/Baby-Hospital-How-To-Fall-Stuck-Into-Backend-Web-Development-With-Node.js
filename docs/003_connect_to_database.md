@@ -1,4 +1,4 @@
-# MongoDB Database
+# Connect To Database
 
 Before we connect to database, I want to show more issues that without Database.
 
@@ -28,9 +28,9 @@ Before we connect to database, I want to show more issues that without Database.
 ]
 ```
 
-By now, you can see our baby information does not contain any unique identifier, which means we can not identify which baby is the one we want, and we are unable to do UPDATE or READ action with this data structure.
+By now, you can see our baby information does not contain any unique identifier, which means we can not identify which baby is the one we want, and we are unable to do UPDATE, READ, DELETE action with this data structure.
 
-With with database Mongodb, it will create `_id` attribute for us automatically.
+With database Mongodb, it will create `_id` attribute for us automatically.
 
 And the baby table in database should looks like this.
 
@@ -69,10 +69,142 @@ By this, we will have `_id` to do those actions the I mentioned above.
 
 * More information about MongoDB and Mongoose
   * https://www.mongodb.com/developer/languages/javascript/getting-started-with-mongodb-and-mongoose/
+* Let's face it, writing MongoDB validation, casting and business logic boilerplate is a drag. That's why we wrote Mongoose.
+  * lol https://mongoosejs.com/
+* We use https://www.mongodb.com to hosting our database right now.
+  * See more here https://www.mongodb.com/basics/mongodb-atlas-tutorial  
+  * !!! IMPORTANT !!!!
+  * Make sure you have already create the server and had the DB_URI to do next step.
+  * !!! IMPORTANT !!!!
+
 
 We will use Mongoose library to connect to MongoDB.
 
+Install mongoose library
+
+```
+npm install --save mongoose
+```
+
+Then add following code to the top of `index.js` file
+
+```js
+// We will inject DB_URI from environment variable
+// There are several different ways to achieve this
+// You even can replace process.env.DB_URI with a single string.
+// But for now, I want to hide my server from public.
+// So I will inject the DB_URI variable from environment 
+const DB_URI  = process.env.DB_URI
+// then require mongoose package
+const mongoose = require('mongoose')
+```
+
+Now I want to make sure we have been establish the connection to database before the app start
+
+So change the `app.listen` part like this
+
+```js
+console.log('Connecting to database')
+mongoose.connect(DB_URI).then(_ => {
+  console.log('Database connected, now starting app')
+  app.listen(port, () => {
+    console.log(`App listening on port ${port}`)
+  })
+})
+```
+
+And run the application, it should output like this
+
+```
+➜  Baby-Hospital git:(main) ✗ node backend/index.js
+Connecting to database
+Database connected, now starting app
+App listening on port 1145
+```
+
+!!!! IMPORTANT !!!!!
+
+If you did not see those message, check all steps above.
+
+!!!! IMPORTANT !!!!!
+
+
+# Connection Established
+
+After connected to the database, we can rewrite our application now.
+
+First we are going to define a baby model.
+
+You can just put the model definition below the line `const port = 1145`
+
+```js
+// DO COPY THIS LINE
+const port = 1145
+
+const Baby = mongoose.model(
+  "Baby",
+  new mongoose.Schema({
+      name: { type: String},
+      gender: {type: String },
+      parent: { type: String},
+      weight: { type: Number },
+      birthAt: { type: Date},
+  })
+)
+```
+
+
+And rewrite this part in baby create route
+
+```js
+// Write into the storage object and return 
+BABY.push(baby)
+res.json(baby)
+```
+
+To
+
+```js
+Baby.create(baby).then(_ => {
+res.json(baby)
+})
+```
+
+Because `Baby.create` is a async function, so we need to wait for action finish then do `res.json`
+
+Now go to the route `GET /api/baby`
+
+```js
+app.get('/api/baby', (req, res) => {
+  res.json(BABY)
+})
+```
+
+Change to
+
+```js
+app.get('/api/baby', (req, res) => {
+  Baby.find({}).then(babyList => {
+    res.json(babyList)
+  })
+})
+```
+
+As last route, every operation to database will be asynchronous, do we need to wait for action to finished then do `res.json
+
+
+Now we can remove the old "database" by comment out the following line
+```
+// var BABY = []
+```
+
+Now heading to http://localhost:8080, you should able to see something like this, if it shows no data, try to create something first.
+
+![](https://github.com/zackexplosion/Baby-Hospital/blob/main/screenshots/005.jpg?raw=true)
+
+
+Then go to [next chapter](./004_CRUD_with_database.md) to finish update and delete action.
 
 ---
 
-Back to [Simple Validation](./002_simple_validation.md)
+Back to [002 Simple Validation](./002_simple_validation.md)

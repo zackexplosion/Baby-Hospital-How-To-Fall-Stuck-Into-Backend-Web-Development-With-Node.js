@@ -4,7 +4,7 @@
     <hr />
     <a-modal v-model:open="open" title="Create Baby Form" @ok="handleOk">
       <a-form
-        :model="newBabyFormState"
+        :model="babyFormState"
         :label-col="labelCol"
       >
         <a-form-item
@@ -13,7 +13,7 @@
           :rules="[{ required: true, message: 'Please input Birth Time!' }]"
         >
           <a-date-picker
-            v-model:value="newBabyFormState.birthAt"
+            v-model:value="babyFormState.birthAt"
             show-time
             type="date"
             placeholder="Pick a date"
@@ -25,33 +25,27 @@
           label="Weight"
           :rules="[{ required: true, message: 'Please input Weight!' }]"
         >
-          <a-input-number v-model:value="newBabyFormState.weight" />
+          <a-input-number v-model:value="babyFormState.weight" />
         </a-form-item>
 
         <a-form-item
           label="Gender"
           :rules="[{ required: true, message: 'Please input Gender!' }]"
         >
-          <a-radio-group v-model:value="newBabyFormState.gender">
+          <a-radio-group v-model:value="babyFormState.gender">
             <a-radio value="male">Male</a-radio>
             <a-radio value="female">Female</a-radio>
           </a-radio-group>
         </a-form-item>
 
         <a-form-item label="Baby name">
-          <a-input v-model:value="newBabyFormState.name" />
+          <a-input v-model:value="babyFormState.name" />
         </a-form-item>
 
         <a-form-item label="Parent">
-          <a-input v-model:value="newBabyFormState.parent" />
+          <a-input v-model:value="babyFormState.parent" />
         </a-form-item>
-        <!-- <a-form-item label="Activity form">
-          <a-textarea v-model:value="newBabyFormState.desc" />
-        </a-form-item> -->
-        <!-- <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
-          <a-button type="primary" @click="onSubmit">Create</a-button>
-          <a-button style="margin-left: 10px">Cancel</a-button>
-        </a-form-item> -->
+
       </a-form>
     </a-modal>
 
@@ -90,12 +84,21 @@ export default {
   },
   data() {
     return {
-      newBabyFormState: {
+      babyFormState: {
         ...defaultBabyForm,
       },
       open: false,
       babyList: [],
       columns: [
+        {
+          title: 'Actions',
+          key: "actions",
+        },
+        {
+          title: "ID",
+          dataIndex: "_id",
+          key: "id",
+        },
         {
           title: "Name",
           dataIndex: "name",
@@ -131,11 +134,14 @@ export default {
     async fetchBabyList(){
       this.babyList = (await request.get("/api/baby")).data;
     },
+    async fetchBaby(id){
+      this.babyFormState = (await request.get("/api/baby/" + id)).data;
+    },
     async handleOk() {
       try {
-        await request.post("/api/baby", toRaw(this.newBabyFormState));
+        await request.post("/api/baby", toRaw(this.babyFormState));
 
-        this.newBabyFormState = {
+        this.babyFormState = {
           ...defaultBabyForm
         }
 

@@ -1,36 +1,10 @@
-// We will inject DB_URI from environment variable
-// There are several different ways to achieve this
-// You even can replace process.env.DB_URI with string.
-// But for now, I want to hide my server from public.
-// So I will inject the DB_URI variable from environment 
-const DB_URI  = process.env.DB_URI
-// then require mongoose package
-const mongoose = require('mongoose')
-const express = require('express')
-const app = express()
-const port = 1145
-const Baby = mongoose.model(
-  "Baby",
-  new mongoose.Schema({
-      name: { type: String},
-      gender: {type: String },
-      parent: { type: String},
-      weight: { type: Number },
-      birthAt: { type: Date},
-  })
-)
+# CRUD With Database
 
-// This is for express to handle request with json payload
-// If without this, req.body will be empty.
-// https://expressjs.com/en/api.html#express.json
-app.use(express.json())
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+## Read action
+Now we heading to the read action, put this part in index.js anyway above `console.log('Connecting to database')`
 
-// var BABY = []
-
+```js
 app.get('/api/baby/:babyId', async (req, res) => {
   try {
     // We need to wrap the input id with mongoose.ObjectId
@@ -52,7 +26,21 @@ app.get('/api/baby/:babyId', async (req, res) => {
     })
   }
 })
+```
 
+Test with Postman, you should able to see the results like this.
+
+![](https://github.com/zackexplosion/Baby-Hospital/blob/main/screenshots/006.jpg?raw=true)
+
+If not, go back to check any error message or previous steps
+
+## Update action
+
+Okay, after read action, now we can do the update, because for frontend development, they need the fetch the current resources that you want to edit to the interface, then send the edited result back
+
+So we need to finish the Read action first.
+
+```js
 app.put('/api/baby/:babyId', async (req, res) => {
   try {
     var baby = await Baby.findOneById(req.params.babyId)
@@ -70,12 +58,21 @@ app.put('/api/baby/:babyId', async (req, res) => {
     })
   }
 })
+```
 
+Update action should like this, but you must notice that, we need to going to do the same check as create action, and are we going to copy whole check conditions to here?
+
+No....we write another function to wrap every validation condition together.
+
+```js
 function BabyValidator(baby){
+  // We define an error variable to storage error message
   var error = false
+
   // If date parse failed, it will return NaN ( Not a Number)
   // We can use JavaScript builtin function "isNaN" to check
   if(isNaN(Date.parse(baby.birthAt))) {
+    // If enter this condition, write the error
     error = 'Birth Time must be a Date'
   }
 
@@ -87,6 +84,7 @@ function BabyValidator(baby){
 
   // Check if the BIOLOGICAL_GENDER_LIST includes baby_gender_to_check or not
   if (BIOLOGICAL_GENDER_LIST.includes(baby_gender_to_check) == false) {
+    // Do the same as above
     error = "We need baby's biological gender here!"
   } else {
     // If it's in the list, rewrite the object going to write.
@@ -100,16 +98,51 @@ function BabyValidator(baby){
   const MAX_BABY_WEIGHT = 10000
   var babyWeight = parseFloat(baby.weight)
   if(babyWeight <= 0 || babyWeight >= MAX_BABY_WEIGHT) {
+    // Do the same as above
     error = `Baby's weight must be between 0 ~ ${MAX_BABY_WEIGHT}g`
   }
 
   return error
 }
+```
 
+
+Now the update action should change like this
+
+```js
+app.put('/api/baby/:babyId', async (req, res) => {
+  try {
+    var baby = await Baby.findOneById(req.params.babyId)
+
+    baby.name = req.body.name
+    baby.parent = req.body.parent
+    baby.birthAt = req.body.birthAt
+    baby.gender = req.body.gender
+    baby.weight = req.body.weight
+
+    var error = BabyValidator(baby)
+
+    if(error) {
+      res.status(400).json({
+        message: error
+      })
+    }
+
+    await baby.save()
+  } catch (error) {
+    return res.status(400).json({
+      message: error.message,
+    })
+  }
+})
+```
+
+And the create route too.
+
+```javascript
 app.post('/api/baby', (req, res) => {
   var baby = req.body
-
-  var error = BabyValidator(baby)
+  var error = BabyValidator(req.body)
 
   if(error) {
     res.status(400).json({
@@ -122,18 +155,6 @@ app.post('/api/baby', (req, res) => {
   })
 
 })
+```
 
-app.get('/api/baby', (req, res) => {
-  Baby.find({}).then(babyList => {
-    res.json(babyList)
-  })
-})
-
-console.log('Connecting to database')
-mongoose.connect(DB_URI).then(_ => {
-  console.log('Database connected, now starting app')
-  app.listen(port, () => {
-    console.log(`App listening on port ${port}`)
-  })
-})
-
+Now we should able the edit the baby's information.
