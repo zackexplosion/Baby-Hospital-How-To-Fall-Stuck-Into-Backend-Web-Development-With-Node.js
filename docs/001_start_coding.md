@@ -18,8 +18,8 @@ Before we code anything else about baby, we need to think
     * Maybe we don't know the parent yet
     * Maybe we don't know the name yet
     * But for the birth time, biological gender and weight, Surely we should know!
-    * So that's why those column marked with "*"
-    * which means those information are required to fill while you entering those information.
+    * So that's why those column marked with ( * )
+    * Which means those information are required to fill while you entering those information.
 
 ## Here is the Baby schema
 ```javascript

@@ -2,7 +2,7 @@
 
 You are running a Baby Hospital and you want to have a system that can manage all baby's information.
 
-Currently, you are the only employee. So you won't do any authentication system and running whole system on your local machine at first.
+Currently, you are the only one employee. So you won't do any authentication system and running whole system on your local machine at first.
 
 And someone already finished the Front End code, you just need to finish the Back End code right now.
 
