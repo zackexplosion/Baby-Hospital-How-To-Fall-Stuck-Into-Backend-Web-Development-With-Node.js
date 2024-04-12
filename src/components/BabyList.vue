@@ -1,6 +1,7 @@
 <template>
   <div>
     <a-button type="primary" @click="open = true">Create New Baby</a-button>
+    <hr />
     <a-modal v-model:open="open" title="Create Baby Form" @ok="handleOk">
       <a-form
         :model="newBabyFormState"
@@ -90,10 +91,11 @@ const wrapperCol = {
 </script>
 
 <script>
+import dayjs from 'dayjs';
 import request from "axios";
 
 var defaultBabyForm = {
-  birthAt: "",
+  birthAt: dayjs(),
   name: "",
   gender: "",
   weight: 0,
@@ -151,6 +153,11 @@ export default {
     async handleOk() {
       try {
         await request.post("/api/baby", toRaw(this.newBabyFormState));
+
+        this.newBabyFormState = {
+          ...defaultBabyForm
+        }
+
         await this.fetchBabyList()
         this.open = false;
       } catch (error) {
