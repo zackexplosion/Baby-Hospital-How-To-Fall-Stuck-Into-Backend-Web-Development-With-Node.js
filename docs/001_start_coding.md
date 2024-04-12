@@ -17,8 +17,9 @@ Before we code anything else about baby, we need to think
   * Like we talked about before, some information may not be available for now
     * Maybe we don't know the parent yet
     * Maybe we don't know the name yet
-    * But for the biological gender and weight, Surely we should know!
-    * So that's why those column marked with "*" which means those information are required to fill while you entering those information.
+    * But for the birth time, biological gender and weight, Surely we should know!
+    * So that's why those column marked with "*"
+    * which means those information are required to fill while you entering those information.
 
 ## Here is the Baby schema
 ```javascript
@@ -72,14 +73,20 @@ And use Postman to do the request too.
 ### WTF? Someone hacked me?
 
 Why a baby can having no gender?
+
 How can a baby without birthday?
+
+How can a parent is a freaking 🤪 string
 
 
 ![](https://github.com/zackexplosion/Baby-Hospital/blob/main/screenshots/002.jpg?raw=true)
 
 
-Let's why we need validation!
+Let's why we need [Validation](./002_simple_validation.md)!
 
+---
+
+Back to [README](../README.md)
 
 
 
