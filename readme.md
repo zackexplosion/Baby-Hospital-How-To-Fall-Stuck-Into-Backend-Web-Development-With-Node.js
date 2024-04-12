@@ -13,7 +13,9 @@ And someone already finished the Front End code, you just need to finish the Bac
 
 ## Getting Started
 
-The source cod will be located in the dir `./backend` and ALL OF THIS TUTORIAL command shown need to execute in dir `./backend` too.
+You can just run the command `npm install && npm run dev` with this project to see the final result.
+
+But I suggest you to create a new empty directory then follow the instructions.
 
 So for now...the system will able to....
 
@@ -35,7 +37,7 @@ https://github.com/expressjs/express
 
 We will use this JavaScript framework to handle the router requirements.
 
-Run the following command to install the Express.js
+So create a new directory go into then run the following command to install the Express.js
 
 `npm install --save express`
 

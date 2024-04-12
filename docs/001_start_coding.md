@@ -61,8 +61,6 @@ And we want to know if the baby information have been successfully stored or not
 So you making the baby list right now.
 
 ```javascript
-var BABY = []
-
 app.get('/api/baby', (req, res) => {
   res.json(BABY)
 })
