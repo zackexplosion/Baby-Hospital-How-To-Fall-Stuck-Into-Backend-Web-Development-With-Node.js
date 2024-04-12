@@ -29,7 +29,7 @@ app.post('/api/baby', (req, res) => {
 })
 ```
 
-Then confirm with Postman, remove the birthAt attribute should show the error message.
+Then confirm with Postman, remove the birthAt attribute and do the request, should show the error message.
 
 ![](https://github.com/zackexplosion/Baby-Hospital/blob/main/screenshots/003.jpg?raw=true)
 
