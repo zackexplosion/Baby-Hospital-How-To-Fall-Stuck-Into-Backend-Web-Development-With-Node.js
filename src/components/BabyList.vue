@@ -1,8 +1,12 @@
 <template>
   <div>
-    <a-button type="primary" @click="showModal">Create New Baby</a-button>
+    <a-button type="primary" @click="open = true">Create New Baby</a-button>
     <a-modal v-model:open="open" title="Create Baby Form" @ok="handleOk">
-      <a-form :model="newBabyFormState" :label-col="labelCol" :wrapper-col="wrapperCol">
+      <a-form
+        :model="newBabyFormState"
+        :label-col="labelCol"
+        :wrapper-col="wrapperCol"
+      >
         <!-- <a-form-item label="Instant delivery">
           <a-switch v-model:checked="newBabyFormState.delivery" />
         </a-form-item> -->
@@ -70,83 +74,97 @@
 
 
 <script setup>
-import { ref, reactive, toRaw } from 'vue';
-const open = ref(true);
-const showModal = () => {
-  open.value = true;
-};
-const handleOk = e => {
-  console.log(e);
-  open.value = false;
-  console.log('submit!', toRaw(formState));
-};
+import { toRaw } from "vue";
 
-
-const formState = reactive({
-  name: '',
-  delivery: false,
-  type: [],
-  resource: '',
-  desc: '',
-});
 // const onSubmit = () => {
 //   console.log('submit!', toRaw(formState));
 // };
 const labelCol = {
   style: {
-    width: '150px',
+    width: "150px",
   },
 };
 const wrapperCol = {
   span: 14,
 };
-
 </script>
 
 <script>
-import request from 'axios';
+import request from "axios";
 
+var defaultBabyForm = {
+  birthAt: "",
+  name: "",
+  gender: "",
+  weight: 0,
+  parent: "",
+};
 
 export default {
-  name: 'HelloWorld',
+  name: "HelloWorld",
   props: {
-    msg: String
+    msg: String,
   },
   data() {
     return {
-      newBabyFormState: {},
+      newBabyFormState: {
+        ...defaultBabyForm,
+      },
+      open: false,
       babyList: [],
       columns: [
         {
-            title: 'Name',
-            dataIndex: 'name',
-            key: 'name',
+          title: "Name",
+          dataIndex: "name",
+          key: "name",
         },
         {
-            title: 'Birth Time',
-            dataIndex: 'birthAt',
-            key: 'birthAt',
+          title: "Birth Time",
+          dataIndex: "birthAt",
+          key: "birthAt",
         },
         {
-            title: 'Gender',
-            dataIndex: 'gender',
-            key: 'gender',
+          title: "Gender",
+          dataIndex: "gender",
+          key: "gender",
         },
         {
-            title: 'Parent',
-            dataIndex: 'parent',
-            key: 'parent',
+          title: "Parent",
+          dataIndex: "parent",
+          key: "parent",
         },
         {
-            title: 'Weight',
-            dataIndex: 'weight',
-            key: 'weight',
-        }
-      ]
-    }
+          title: "Weight",
+          dataIndex: "weight",
+          key: "weight",
+        },
+      ],
+    };
   },
   async mounted() {
-    this.babyList = (await request.get('/api/baby')).data
-  }
-}
+    this.fetchBabyList()
+  },
+  methods: {
+    async fetchBabyList(){
+      this.babyList = (await request.get("/api/baby")).data;
+    },
+    async handleOk() {
+      try {
+        await request.post("/api/baby", toRaw(this.newBabyFormState));
+        await this.fetchBabyList()
+        this.open = false;
+      } catch (error) {
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.message
+        ) {
+          alert(error.response.data.message);
+        } else {
+          alert(error);
+        }
+      }
+    },
+  },
+};
 </script>
