@@ -13,9 +13,11 @@ app.get('/api/baby/:babyId', async (req, res) => {
 
     // Then we can find the specific record with _id
     var baby = await Baby.findOne({_id})
-    // And this is same as 
+
+    // This is same as 
     // var baby = await Baby.findOne({_id: _id})
-    // See more https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
+    // See more 
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
 
     // If found, output the record
     res.json(baby)
@@ -30,6 +32,8 @@ app.get('/api/baby/:babyId', async (req, res) => {
 
 Test with Postman, you should able to see the results like this.
 
+Which means baby creation successfully.
+
 ![](https://github.com/zackexplosion/Baby-Hospital/blob/main/screenshots/006.jpg?raw=true)
 
 If not, go back to check any error message or previous steps
@@ -40,11 +44,23 @@ Okay, after read action, now we can do the update, because for frontend developm
 
 So we need to finish the Read action first.
 
+### But why do we need a update action?
+
+Remember the baby model that we designed before? Some information may not available when we create the baby, so if now we have the information, how to putin to correct baby record?
+
+That's what update action does!
+
+---
+
+And this is a update action looks like.
+
 ```js
 app.put('/api/baby/:babyId', async (req, res) => {
   try {
     var baby = await Baby.findOneById(req.params.babyId)
 
+    // This is some kind of allow list
+    // Because req.body may contains other information that we don't want
     baby.name = req.body.name
     baby.parent = req.body.parent
     baby.birthAt = req.body.birthAt
@@ -60,7 +76,7 @@ app.put('/api/baby/:babyId', async (req, res) => {
 })
 ```
 
-Update action should like this, but you must notice that, we need to going to do the same check as create action, and are we going to copy whole check conditions to here?
+Update action should like this, but you must notice that, we need going to do the same check as create action again, and.... are we going to copy whole check conditions codes to here?
 
 No....we write another function to wrap every validation condition together.
 
@@ -72,7 +88,7 @@ function BabyValidator(baby){
   // If date parse failed, it will return NaN ( Not a Number)
   // We can use JavaScript builtin function "isNaN" to check
   if(isNaN(Date.parse(baby.birthAt))) {
-    // If enter this condition, write the error
+    // If enter this condition, assign the error message to the error variable
     error = 'Birth Time must be a Date'
   }
 
@@ -107,28 +123,39 @@ function BabyValidator(baby){
 ```
 
 
-Now the update action should change like this
+Now the complete update action should looks like this.
 
 ```js
 app.put('/api/baby/:babyId', async (req, res) => {
   try {
-    var baby = await Baby.findOneById(req.params.babyId)
+    // Use find the ObjectId as read action too.
+    var _id = new mongoose.Types.ObjectId(req.params.babyId)
+    var baby = await Baby.findOne({_id})
 
+    // This is some kind of allow list
+    // Because req.body may contains other information that we don't want
+    // We just update the baby model instance here, and save back to Database later.
     baby.name = req.body.name
     baby.parent = req.body.parent
     baby.birthAt = req.body.birthAt
     baby.gender = req.body.gender
     baby.weight = req.body.weight
 
+    // Run the validator
     var error = BabyValidator(baby)
 
     if(error) {
-      res.status(400).json({
+      return res.status(400).json({
         message: error
       })
     }
 
+
+    // If pass the validation, save back to Database.
     await baby.save()
+
+    // Then finish the request.
+    return res.json(baby)
   } catch (error) {
     return res.status(400).json({
       message: error.message,
@@ -137,7 +164,7 @@ app.put('/api/baby/:babyId', async (req, res) => {
 })
 ```
 
-And the create route too.
+And the create action.
 
 ```javascript
 app.post('/api/baby', (req, res) => {
@@ -145,7 +172,7 @@ app.post('/api/baby', (req, res) => {
   var error = BabyValidator(req.body)
 
   if(error) {
-    res.status(400).json({
+    return res.status(400).json({
       message: error
     })
   }
@@ -157,4 +184,12 @@ app.post('/api/baby', (req, res) => {
 })
 ```
 
-Now we should able the edit the baby's information.
+Now we should able to the edit the baby's information.
+
+![](https://github.com/zackexplosion/Baby-Hospital/blob/main/screenshots/007.jpg?raw=true)
+
+Next [DELETE Baby older than 6 years old](./005_DELETE_baby_older_than_6_years_old.md) to finish update and delete action.
+
+---
+
+Back to [Connect to database](./003_connect_to_database.md)

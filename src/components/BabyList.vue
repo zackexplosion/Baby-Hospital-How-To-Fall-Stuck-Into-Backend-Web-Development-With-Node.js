@@ -2,11 +2,8 @@
   <div>
     <a-button type="primary" @click="open = true">Create New Baby</a-button>
     <hr />
-    <a-modal v-model:open="open" title="Create Baby Form" @ok="handleOk">
-      <a-form
-        :model="babyFormState"
-        :label-col="labelCol"
-      >
+    <a-modal v-model:open="open" :title="formTitle" @ok="handleOk">
+      <a-form :model="babyFormState" :label-col="labelCol">
         <a-form-item
           label="Birth Time"
           name="birthAt"
@@ -45,12 +42,19 @@
         <a-form-item label="Parent">
           <a-input v-model:value="babyFormState.parent" />
         </a-form-item>
-
       </a-form>
     </a-modal>
 
     <!-- The table -->
-    <a-table :dataSource="babyList" :columns="columns" />
+    <a-table :dataSource="babyList" :columns="columns">
+      <template #bodyCell="{ column, record }">
+        <template v-if="column.key === 'action'">
+          <button @click="editBaby(record)">
+            <EditFilled />
+          </button>
+        </template>
+      </template>
+    </a-table>
   </div>
 </template>
 
@@ -66,8 +70,9 @@ const labelCol = {
 </script>
 
 <script>
-import dayjs from 'dayjs';
-import request from "axios";
+import dayjs from "dayjs"
+import request from "axios"
+import { EditFilled } from '@ant-design/icons-vue'
 
 var defaultBabyForm = {
   birthAt: dayjs(),
@@ -82,6 +87,9 @@ export default {
   props: {
     msg: String,
   },
+  components: {
+    EditFilled
+  },
   data() {
     return {
       babyFormState: {
@@ -91,8 +99,8 @@ export default {
       babyList: [],
       columns: [
         {
-          title: 'Actions',
-          key: "actions",
+          title: "Actions",
+          key: "action",
         },
         {
           title: "ID",
@@ -128,24 +136,52 @@ export default {
     };
   },
   async mounted() {
-    this.fetchBabyList()
+    this.fetchBabyList();
+  },
+  computed: {
+    formTitle () {
+      if(this.babyFormState.update === true) {
+          return `Update Baby ${this.babyFormState._id} Form`
+      }
+      return 'Create Baby Form'
+    },
   },
   methods: {
-    async fetchBabyList(){
+    async editBaby(record) {
+      this.fetchBaby(record._id)
+      this.open = true;
+    },
+    async fetchBabyList() {
       this.babyList = (await request.get("/api/baby")).data;
     },
-    async fetchBaby(id){
-      this.babyFormState = (await request.get("/api/baby/" + id)).data;
+    async fetchBaby(id) {
+      const res = (await request.get("/api/baby/" + id)).data
+      // console.log(res)
+      // console.log(this.babyFormState)
+      // this.babyFormState = {
+      //   name: 'yolo'
+      // }
+
+      this.babyFormState = Object.assign({}, res, {
+        birthAt: dayjs(res.birthAt),
+        update: true,
+      })
     },
     async handleOk() {
       try {
-        await request.post("/api/baby", toRaw(this.babyFormState));
+        var form = toRaw(this.babyFormState)
 
-        this.babyFormState = {
-          ...defaultBabyForm
+        if (form.update === true) {
+          await request.put("/api/baby/" + form._id, toRaw(this.babyFormState));
+        } else {
+          await request.post("/api/baby", toRaw(this.babyFormState));
         }
 
-        await this.fetchBabyList()
+        this.babyFormState = {
+          ...defaultBabyForm,
+        }
+
+        await this.fetchBabyList();
         this.open = false;
       } catch (error) {
         if (

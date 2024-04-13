@@ -203,7 +203,7 @@ Now heading to http://localhost:8080, you should able to see something like this
 ![](https://github.com/zackexplosion/Baby-Hospital/blob/main/screenshots/005.jpg?raw=true)
 
 
-Then go to [next chapter](./004_CRUD_with_database.md) to finish update and delete action.
+Then go to [CRUD with Database](./004_CRUD_with_database.md) to finish update and delete action.
 
 ---
 

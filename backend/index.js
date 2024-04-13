@@ -55,15 +55,34 @@ app.get('/api/baby/:babyId', async (req, res) => {
 
 app.put('/api/baby/:babyId', async (req, res) => {
   try {
-    var baby = await Baby.findOneById(req.params.babyId)
+    // Use find the ObjectId as read action too.
+    var _id = new mongoose.Types.ObjectId(req.params.babyId)
+    var baby = await Baby.findOne({_id})
 
+    // This is some kind of allow list
+    // Because req.body may contains other information that we don't want
+    // We just update the baby model instance here, and save back to Database later.
     baby.name = req.body.name
     baby.parent = req.body.parent
     baby.birthAt = req.body.birthAt
     baby.gender = req.body.gender
     baby.weight = req.body.weight
 
+    // Run the validator
+    var error = BabyValidator(baby)
+
+    if(error) {
+      return res.status(400).json({
+        message: error
+      })
+    }
+
+
+    // If pass the validation, save back to Database.
     await baby.save()
+    
+    // Then finish the request.
+    return res.json(baby)
   } catch (error) {
     return res.status(400).json({
       message: error.message,
