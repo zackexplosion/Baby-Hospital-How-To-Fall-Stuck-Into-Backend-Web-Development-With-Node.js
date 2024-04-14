@@ -61,7 +61,7 @@ app.put('/api/baby/:babyId', async (req, res) => {
 
     // This is some kind of allow list
     // Because req.body may contains other information that we don't want
-    // We just update the baby model instance here, and save back to Database later.
+    // We just update the baby model instance here, and save to Database later.
     baby.name = req.body.name
     baby.parent = req.body.parent
     baby.birthAt = req.body.birthAt
@@ -78,9 +78,9 @@ app.put('/api/baby/:babyId', async (req, res) => {
     }
 
 
-    // If pass the validation, save back to Database.
+    // If pass the validation, save to Database.
     await baby.save()
-    
+
     // Then finish the request.
     return res.json(baby)
   } catch (error) {
