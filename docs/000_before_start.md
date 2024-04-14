@@ -1,46 +1,62 @@
 ## Before Start
 
+* Make sure you are able to understand how to do `run the command "npm install"`.
 * Make sure you have installed node.js on your system.
-* Make sure you have editors can write code.
+  * https://nodejs.org/en/download
+* Make sure you have any kind of editor which can writing code.
+  * VsCode ( Which I am using ) https://code.visualstudio.com/ 
+  * Sublime Text https://www.sublimetext.com/
+  * ... Anything can edit text files.
 
 ## Run This Project
 
 You can just run the command `npm install && npm run dev` in current directory to see the final result.
 
-After that, I suggest you to remove the every file and directory in `backend` then follow the instructions.
+But I suggest you to remove the every files and directories in `backend` directory then follow the instructions.
 
+## Basic Actions and Routes
 
-## Basic Actions
+For now...the system should able do to following actions and those actions will match with one specific route.
 
-So for now...the system will able to....
-
-* Receive a all baby's information and make a list.
+* Make a list about all baby's information.
   * route `GET /api/baby`
-* Create a new baby record in database.
+* Create a new baby record.
   * route `POST /api/baby`
-* Update a specific baby's information in database.
+* Update a specific baby's information.
   * route `PUT /api/baby/:babyId`
-* Receive a specific baby's information and show in GUI.
+* Get a specific baby's information.
   * route `GET /api/baby/:babyId`
-* Remove a specific baby's information which older than 6 years old.
+* Delete a specific baby's information.
   * route `DELETE /api/baby/:babyId`
 
+If you have questions like ......
 
-### Express.js
+* Why router?
+* Why do we design routes like that?
+* Is this some kind of rules or something necessary?
 
-https://github.com/expressjs/express
+Check this. [Why do we need routers even controllers?](../appendix_docs/why_do_we_need_routers_even_controllers.md)
+
+
+### Install Express.js
 
 We will use this JavaScript framework to handle the routing requirements.
 
-So we need to run following command to install the Express.js.
+So we need to run following command to install the Express.js to our project.
 
 `npm install --save express`
 
-Then create `index.js` in `backend` directory and use the hello world example at first.
+Then create `index.js` in `backend` directory and copy following hello world example at first.
+
+You can see more information about Express.js from here https://github.com/expressjs/express.
 
 ```javascript
+// Some package requirements
 const express = require('express')
 const app = express()
+
+// We will run this application on port 1145
+// So the server will serve this url http://localhost:1145
 const port = 1145
 
 // This is for express to handle request with json payload
@@ -65,5 +81,10 @@ If you can not see those message, go back to Before Coding.
 ➜  node index.js
 Example app listening on port 1145
 ```
+
+And if you visit the url http://localhost:1145, you should able to see this `Hello World` from server.
+
+![](https://github.com/zackexplosion/Baby-Hospital/blob/main/screenshots/000.jpg?raw=true)
+
 
 If you saw those message. Let's go next chapter [Start Coding](./docs/001_start_coding.md)

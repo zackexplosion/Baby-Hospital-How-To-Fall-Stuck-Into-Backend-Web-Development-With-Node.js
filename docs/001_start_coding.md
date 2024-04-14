@@ -84,7 +84,7 @@ Let's why we need [Validation](./002_simple_validation.md)!
 
 ---
 
-Back to [Before Start](../000_before_start.md)
+Back to [Before Start](./000_before_start.md)
 
 
 

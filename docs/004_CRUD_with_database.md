@@ -188,7 +188,7 @@ Now we should able to the edit the baby's information.
 
 ![](https://github.com/zackexplosion/Baby-Hospital/blob/main/screenshots/007.jpg?raw=true)
 
-Next [DELETE Baby older than 6 years old](./005_DELETE_baby_older_than_6_years_old.md) to finish update and delete action.
+Next [DELETE Baby older than 6 years old](./005_final_action_and_more.md) delete action and....more!
 
 ---
 
