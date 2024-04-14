@@ -36,9 +36,9 @@ Before we code anything else about baby, we need to think
 
 ### `POST /api/baby`
 
-We are going to create a baby by this route, and we will storage the information in memory for now.
+We are going to create a baby by this route, and we will storage the information in memory FOR NOW.
 
-So we going to define a variable to do that, by any line before baby routes add this line
+So we are going to define a variable to do that, by any line before baby routes add this line
 
 ```javascript
 var BABY = []
@@ -50,7 +50,7 @@ app.post('/api/baby', (req, res) => {
 })
 ```
 
-That it for now! Then go to Postman to send the baby information to create.
+That it! Then go to Postman to send the baby information to create.
 
 ![](https://github.com/zackexplosion/Baby-Hospital/blob/main/screenshots/001.jpg?raw=true)
 
@@ -58,7 +58,7 @@ That it for now! Then go to Postman to send the baby information to create.
 
 And we want to know if the baby information have been successfully stored or not.
 
-So you making the baby list right now.
+So we are making the baby list right now.
 
 ```javascript
 app.get('/api/baby', (req, res) => {

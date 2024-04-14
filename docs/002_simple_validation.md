@@ -4,12 +4,13 @@ Remember last chapter we saw many strange data write into Baby table?
 
 That because we do nothing before write into the data.
 
-ANYTHING FROM INTERNET CAN NOT BE TRUST.
+So anyone ...even yourself may enter wrong data into the system.
 
-We have to do some check before actual write action.
+and ..... ANYTHING FROM INTERNET CAN NOT BE TRUST.
+
+So we have to do some checks before saving data action.
 
 ## Back to the create action
-
 
 ```javascript
 app.post('/api/baby', (req, res) => {
