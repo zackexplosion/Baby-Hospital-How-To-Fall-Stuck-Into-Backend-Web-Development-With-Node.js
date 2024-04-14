@@ -7,6 +7,8 @@
   * VsCode ( Which I am using ) https://code.visualstudio.com/ 
   * Sublime Text https://www.sublimetext.com/
   * ... Anything can edit text files.
+* Some basic knowledge about JavaScript programming will be better.
+  * https://www.w3schools.com/whatis/whatis_js.asp
 
 ## Run This Project
 
