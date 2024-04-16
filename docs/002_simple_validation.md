@@ -19,14 +19,15 @@ app.post('/api/baby', (req, res) => {
   // If date parse failed, it will return NaN ( Not a Number)
   // We can use JavaScript builtin function "isNaN" to check
   if(isNaN(Date.parse(baby.birthAt))) {
-    res.status(400).json({
+    return res.status(400).json({
       'message': 'Birth Time must be a Date'
     })
   }
 
   // Write into the storage object and return 
   BABY.push(baby)
-  res.json(baby)
+  // Make sure exit this current function
+  return res.json(baby)
 })
 ```
 
@@ -84,7 +85,7 @@ app.post('/api/baby', (req, res) => {
 
   // Write into the storage object and return 
   BABY.push(baby)
-  res.json(baby)
+  return res.json(baby)
 })
 ```
 

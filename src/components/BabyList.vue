@@ -49,9 +49,9 @@
     <a-table :dataSource="babyList" :columns="columns">
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">
-          <button @click="editBaby(record)">
-            <EditFilled />
-          </button>
+          <EditFilled @click="editBaby(record)" />
+          <a-divider type="vertical" />
+          <DeleteFilled @click="showConfirmDeleteModal(record._id)"/>
         </template>
       </template>
     </a-table>
@@ -72,7 +72,8 @@ const labelCol = {
 <script>
 import dayjs from "dayjs"
 import request from "axios"
-import { EditFilled } from '@ant-design/icons-vue'
+import { EditFilled, DeleteFilled } from '@ant-design/icons-vue'
+import { Modal } from 'ant-design-vue';
 
 var defaultBabyForm = {
   birthAt: dayjs(),
@@ -88,6 +89,7 @@ export default {
     msg: String,
   },
   components: {
+    DeleteFilled,
     EditFilled
   },
   data() {
@@ -147,12 +149,29 @@ export default {
     },
   },
   methods: {
+    showConfirmDeleteModal(id) {
+      var self = this
+      Modal.confirm({
+        title: 'Deletion Confirmation',
+        content: `Are you sure you want to delete ${id} ?`,
+        async onOk() {
+          await self.deleteBaby(id)
+          await self.fetchBabyList()
+        },
+        onCancel() {
+          console.log('Cancel');
+        },
+      });
+    },
     async editBaby(record) {
       this.fetchBaby(record._id)
       this.open = true;
     },
     async fetchBabyList() {
       this.babyList = (await request.get("/api/baby")).data;
+    },
+    async deleteBaby(id) {
+      await request.delete("/api/baby/" + id)
     },
     async fetchBaby(id) {
       const res = (await request.get("/api/baby/" + id)).data

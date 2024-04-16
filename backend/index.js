@@ -4,11 +4,16 @@
 // But for now, I want to hide my server from public.
 // So I will inject the DB_URI variable from environment 
 const DB_URI  = process.env.DB_URI
-// then require mongoose package
+
+// Dependencies
 const mongoose = require('mongoose')
 const express = require('express')
 const app = express()
+
+// App listen port
 const port = 1145
+
+// The baby model
 const Baby = mongoose.model(
   "Baby",
   new mongoose.Schema({
@@ -17,6 +22,7 @@ const Baby = mongoose.model(
       parent: { type: String},
       weight: { type: Number },
       birthAt: { type: Date},
+      markAsDeleted: { type: Boolean, default: false}
   })
 )
 
@@ -30,6 +36,20 @@ app.get('/', (req, res) => {
 })
 
 // var BABY = []
+
+app.delete('/api/baby/:babyId', async (req, res) => {
+    // We need to wrap the input id with mongoose.ObjectId
+    // Otherwise the query won't work
+    var _id = new mongoose.Types.ObjectId(req.params.babyId)
+
+    // Then delete the record in the database
+    // https://mongoosejs.com/docs/5.x/docs/api/model.html#model_Model.findByIdAndDelete
+    await Baby.findByIdAndDelete(_id)
+
+    return res.json({
+      message: 'Delete Successfully.'
+    })
+})
 
 app.get('/api/baby/:babyId', async (req, res) => {
   try {
@@ -131,13 +151,13 @@ app.post('/api/baby', (req, res) => {
   var error = BabyValidator(baby)
 
   if(error) {
-    res.status(400).json({
+    return res.status(400).json({
       message: error
     })
   }
 
   Baby.create(baby).then(_ => {
-    res.json(baby)
+    return res.json(baby)
   })
 
 })
@@ -147,6 +167,7 @@ app.get('/api/baby', (req, res) => {
     res.json(babyList)
   })
 })
+
 
 console.log('Connecting to database')
 mongoose.connect(DB_URI).then(_ => {

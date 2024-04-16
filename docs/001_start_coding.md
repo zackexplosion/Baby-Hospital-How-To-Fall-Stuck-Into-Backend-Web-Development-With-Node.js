@@ -46,7 +46,7 @@ var BABY = []
 app.post('/api/baby', (req, res) => {
   var baby = req.body 
   BABY.push(baby)
-  res.json(baby)
+  return res.json(baby)
 })
 ```
 
