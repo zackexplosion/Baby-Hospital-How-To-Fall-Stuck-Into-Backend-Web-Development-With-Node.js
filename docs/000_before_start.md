@@ -1,13 +1,13 @@
 ## Before Start
 
-* Make sure you are able to understand how to do `run the command "npm install"`.
-* Make sure you have installed node.js on your system.
+* Make sure you can understand how to do `run the command "npm install"`.
+* Make sure you have installed Node.js on your system.
   * https://nodejs.org/en/download
-* Make sure you have any kind of editor which can writing code.
+* Make sure you have any kind of editor which can write code.
   * VsCode ( Which I am using ) https://code.visualstudio.com/ 
   * Sublime Text https://www.sublimetext.com/
   * ... Anything can edit text files.
-* Some basic knowledge about JavaScript programming will be better.
+* And having some basic knowledge about JavaScript programming will be better.
   * https://www.w3schools.com/whatis/whatis_js.asp
 
 ## Run This Project
