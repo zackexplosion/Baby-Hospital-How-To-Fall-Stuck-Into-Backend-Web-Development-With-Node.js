@@ -22,6 +22,12 @@ const Baby = mongoose.model(
       parent: { type: String},
       weight: { type: Number },
       birthAt: { type: Date},
+      /* 
+      We use the new option 'default' here,
+      Which means "If no value is provided, the value define here will be used."
+      We want every baby create in here mark as NOT deleted.
+      So use default: false here.
+      */
       markAsDeleted: { type: Boolean, default: false}
   })
 )
@@ -38,17 +44,20 @@ app.get('/', (req, res) => {
 // var BABY = []
 
 app.delete('/api/baby/:babyId', async (req, res) => {
-    // We need to wrap the input id with mongoose.ObjectId
-    // Otherwise the query won't work
-    var _id = new mongoose.Types.ObjectId(req.params.babyId)
+  // We need to wrap the input id with mongoose.ObjectId
+  // Otherwise the query won't work
+  var _id = new mongoose.Types.ObjectId(req.params.babyId)
 
-    // Then delete the record in the database
-    // https://mongoosejs.com/docs/5.x/docs/api/model.html#model_Model.findByIdAndDelete
-    await Baby.findByIdAndDelete(_id)
+  // Then set the `markAsDeleted` attribute to TRUE
+  // https://mongoosejs.com/docs/api/model.html#Model.findByIdAndUpdate()
+  await Baby.findByIdAndUpdate(_id, {
+    markAsDeleted: true
+  })
 
-    return res.json({
-      message: 'Delete Successfully.'
-    })
+  // We don't really need to let the client know what were we doing here.
+  return res.json({
+    message: 'Delete Successfully.'
+  })
 })
 
 app.get('/api/baby/:babyId', async (req, res) => {
@@ -162,10 +171,17 @@ app.post('/api/baby', (req, res) => {
 
 })
 
-app.get('/api/baby', (req, res) => {
-  Baby.find({}).then(babyList => {
-    res.json(babyList)
+app.get('/api/baby', async (req, res) => {
+
+  /*
+  We want to filter the records by `markAsDeleted: false` 
+  Which means we want the records never been delete yet.
+  */
+  var babyList = await Baby.find({
+    markAsDeleted: false
   })
+
+  return res.json(babyList)
 })
 
 
