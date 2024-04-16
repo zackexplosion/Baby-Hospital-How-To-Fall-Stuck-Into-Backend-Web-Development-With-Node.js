@@ -24,7 +24,7 @@ const Baby = mongoose.model(
       birthAt: { type: Date},
       /* 
       We use the new option 'default' here
-      which means "If no value is provided, the value define here will be used."
+      which means "If no value is provided, the value define here will be used".
 
       We want every baby create in here mark as NOT deleted.
       So use `default: false` here.
