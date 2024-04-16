@@ -23,10 +23,13 @@ const Baby = mongoose.model(
       weight: { type: Number },
       birthAt: { type: Date},
       /* 
-      We use the new option 'default' here,
-      Which means "If no value is provided, the value define here will be used."
+      We use the new option 'default' here
+      which means "If no value is provided, the value define here will be used."
+
       We want every baby create in here mark as NOT deleted.
-      So use default: false here.
+      So use `default: false` here.
+
+      And this flag will be Boolean type.
       */
       markAsDeleted: { type: Boolean, default: false}
   })

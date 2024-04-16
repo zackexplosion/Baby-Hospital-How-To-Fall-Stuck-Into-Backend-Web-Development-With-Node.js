@@ -135,12 +135,16 @@ After connected to the database, we can rewrite our application now.
 
 First we are going to define a baby model.
 
-You can just put the model definition below the line `const port = 1145`
+You can just put the model definition below the line `const port = 1145`, like...
 
 ```js
-// DO COPY THIS LINE
+// DO NOT COPY THIS LINE
+// DO NOT COPY THIS LINE
 const port = 1145
+// DO NOT COPY THIS LINE
+// DO NOT COPY THIS LINE
 
+// The baby model
 const Baby = mongoose.model(
   "Baby",
   new mongoose.Schema({
@@ -149,6 +153,16 @@ const Baby = mongoose.model(
       parent: { type: String},
       weight: { type: Number },
       birthAt: { type: Date},
+      /* 
+      We use the new option 'default' here
+      which means "If no value is provided, the value define here will be used."
+
+      We want every baby create in here mark as NOT deleted.
+      So use `default: false` here.
+
+      And this flag will be Boolean type.
+      */
+      markAsDeleted: { type: Boolean, default: false}
   })
 )
 ```
