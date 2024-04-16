@@ -6,27 +6,27 @@ In here, I will introduce you some scenarios which happen in the real world.
 
 By following this guide, you will able to fully understand why we are doing it and What is the purpose of it.
 
-And no more "WTH am I doing right now!?"
+And there shall be no more "WTH am I doing right now!?"
 
 We are starting from a very simple example.
 
-Well....No more talking. Let's get some fun!
+Well....No more talking. Let's have some fun!
 
 ## Scenario
 
-You are running a Baby Hospital and you want to have a system that can manage all baby's information.
+You are running a Baby Hospital and you want to have a system that manage all baby's information.
 
-Currently, you are the only one employee and boss man.
+Currently, you are the only one employee and boss.
 
-So you need do anything by yourself!
+So you need do anything all by yourself!
 
-Which means you are full responsible for ANYTHING to yourself!.
+It means that you are fully responsible for everything that happens in this baby hospital.
 
 And because you are the only one for now, so the system...
 
 * Won't require any authentication FOR NOW.
 * WILL run on your local machine FOR NOW.
-* Those things means the system WILL BE VERY INSECURITY FOR NOW.
+* Those things means the system WILL BE VERY INSECURE FOR NOW.
 * But we will deal with that later.
 
 BTW, You already hired someone to finished the GUI.
