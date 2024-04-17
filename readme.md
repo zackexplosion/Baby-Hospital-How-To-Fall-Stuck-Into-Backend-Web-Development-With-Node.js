@@ -29,11 +29,11 @@ And because you are the only one for now, so the system...
 * Those things means the system WILL BE VERY INSECURE FOR NOW.
 * But we will deal with that later.
 
-BTW, You already hired someone to finished the GUI.
+BTW, You have already hired someone to finish the GUI.
 
 ![preview](https://github.com/zackexplosion/Baby-Hospital/blob/main/screenshots/preview.jpg?raw=true)
 
-So you just need to finish backend to make the system works.
+So you just need to finish backend to make the system work.
 
 Next page [Before Start](./docs/000_before_start.md).
 
