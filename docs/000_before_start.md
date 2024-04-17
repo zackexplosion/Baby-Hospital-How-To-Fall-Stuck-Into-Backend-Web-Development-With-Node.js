@@ -1,13 +1,13 @@
 ## Before Start
 
-* Make sure you can understand how to do `run the command "npm install"`.
+* Make sure you understand how to do `run the command "npm install"`.
 * Make sure you have installed Node.js on your system.
   * https://nodejs.org/en/download
 * Make sure you have any kind of editor which can write code.
   * VsCode ( Which I am using ) https://code.visualstudio.com/ 
   * Sublime Text https://www.sublimetext.com/
-  * ... Anything can edit text files.
-* And having some basic knowledge about JavaScript programming will be better.
+  * Anything can edit text files.
+* And have some basic knowledge about JavaScript programming will be better.
   * https://www.w3schools.com/whatis/whatis_js.asp
 
 ## Run This Project
@@ -18,7 +18,7 @@ But I suggest you to remove the every files and directories in `backend` directo
 
 ## Basic Actions and Routes
 
-For now...the system should able do to following actions and those actions will match with one specific route.
+For now...the system should be able to follow actions and those actions will match with one specific route.
 
 * Make a list about all baby's information.
   * route `GET /api/baby`
@@ -44,11 +44,11 @@ Check this. [Why do we need routers even controllers?](../appendix_docs/why_do_w
 
 We will use this JavaScript framework to handle the routing requirements.
 
-So we need to run following command to install the Express.js to our project.
+So we need to run following command to install the Express.js to our project,
 
 `npm install --save express`
 
-Then create `index.js` in `backend` directory and copy following hello world example at first.
+then create `index.js` in `backend` directory and copy following hello world example at first.
 
 You can see more information about Express.js from here https://github.com/expressjs/express.
 
@@ -89,4 +89,4 @@ And if you visit the url http://localhost:1145, you should able to see this `Hel
 ![](https://github.com/zackexplosion/Baby-Hospital/blob/main/screenshots/000.jpg?raw=true)
 
 
-If you saw those message. Let's go next chapter [Start Coding](./docs/001_start_coding.md)
+If you have fully understood the above instructions. Let's go next chapter [Start Coding](./docs/001_start_coding.md)
