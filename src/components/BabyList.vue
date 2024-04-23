@@ -1,6 +1,7 @@
 <template>
   <div>
     <a-button type="primary" @click="open = true">Create New Baby</a-button>
+    <a-button type="default" @click="migrateModalOpen = true">Upload Migrate File</a-button>
     <hr />
     <a-modal v-model:open="open" :title="formTitle" @ok="handleOk">
       <a-form :model="babyFormState" :label-col="labelCol">

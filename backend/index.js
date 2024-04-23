@@ -91,7 +91,7 @@ app.put('/api/baby/:babyId', async (req, res) => {
     var _id = new mongoose.Types.ObjectId(req.params.babyId)
     var baby = await Baby.findOne({_id})
 
-    // This is some kind of allow list
+    // This is some kind of allowlist
     // Because req.body may contains other information that we don't want
     // We just update the baby model instance here, and save to Database later.
     baby.name = req.body.name
@@ -185,6 +185,27 @@ app.get('/api/baby', async (req, res) => {
   })
 
   return res.json(babyList)
+})
+
+/*
+We are going to use the package named `multer` to deal our upload requirements.
+
+You can see more detail here https://github.com/expressjs/multer.
+
+Now we start with the package install command `npm install multer --save` to install the package into production dependencies.
+
+*/
+const multer  = require('multer')
+const upload = multer({ dest: 'uploads/' })
+
+app.post('/api/baby/migrate', upload.single('migrate-file'), function (req, res) {
+
+  console.log('req.file', req.file)
+  // req.file is the `migrate-file` file
+  // req.body will hold the text fields, if there were any
+  res.json({
+    'message': 'Uploaded successfully.'
+  })
 })
 
 

@@ -22,17 +22,17 @@ Here are the files.
   {
     "gender": "male",
     "birth_date": "01/01/2024",
-    "birth_time": "11:11:11",
+    "birth_time": "11:11:11"
   },
   {
     "ID": "01/02/2024:09:09:09",
     "name": "Anne",
     "gender": "female",
-    "weight": 1000,
+    "weight": 1000
   },
   { 
     "weight": 1500,
-    "birth_time": "01/03/2024:10:10:10",
+    "birth_time": "01/03/2024:10:10:10"
   }
 ]
 ```
