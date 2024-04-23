@@ -89,4 +89,4 @@ And if you visit the url http://localhost:1145, you should able to see this `Hel
 ![](https://github.com/zackexplosion/Baby-Hospital/blob/main/screenshots/000.jpg?raw=true)
 
 
-If you have fully understood the above instructions. Let's go next chapter [Start Coding](./docs/001_start_coding.md)
+If you have seen the above message. Let's go next chapter [Start Coding](./docs/001_start_coding.md)

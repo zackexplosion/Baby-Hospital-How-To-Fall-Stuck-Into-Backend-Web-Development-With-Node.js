@@ -1,12 +1,12 @@
 # Validation
 
-Remember last chapter we saw many strange data write into Baby table?
+Remember last chapter we have seen many strange data that are written into Baby table. 
 
-That because we do nothing before write into the data.
+It is because we do nothing before writing into the data.
 
 So anyone ...even yourself may enter wrong data into the system.
 
-and ..... ANYTHING FROM INTERNET CAN NOT BE TRUST.
+and ..... ANYTHING FROM THE INTERNET CAN NOT BE TRUSTED.
 
 So we have to do some checks before saving data action.
 
@@ -91,15 +91,15 @@ app.post('/api/baby', (req, res) => {
 
 # Summary
 
-So far, our system should able to check the input data simply, but you must found a issue right now.
+So far, our system should be able to check the input data simply, but you must have found an issue right now.
 
-Why every time I changed the source code and restart the app, all baby were gone?
+Why is every time I changed the source code and restart the app, all baby were gone?
 
-We even not finished the delete function yet lol.
+We haven't yet finished the delete function. LOL
 
-Because our baby table just storage with the BABY variable currently, which only lives while application alive, when you restart the app, it means all data within application lifecycle will be erased.
+It is because our baby table just a storage with the BABY variable currently which only lives while application is alive. When you restart the app, it means all data within application lifecycle will be erased.
 
-That's why we need a [Database](./003_connect_to_database.md)! to storage our baby table!
+That's why we need a [Database](./003_connect_to_database.md)! to store our baby table!
 
 ---
 

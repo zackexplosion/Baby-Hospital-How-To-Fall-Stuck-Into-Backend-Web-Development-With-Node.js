@@ -1,14 +1,14 @@
 # So what is a Baby?
 
-Before we code anything else about baby, we need to think 
+Before we code anything else about baby, we need to understand 
 
 * What is a baby?
-  * A baby model should able to carry information about a individual baby.
+  * A baby model should able to carry information about an individual baby.
 * When will you enter the baby's information to the system?
-  * I would like to enter the baby's information right after they born.
+  * I would like to enter the baby's information right after they are born.
   * So some of information may not be available at that time.
-* What information should a baby carried?
-  * For example, we want to storage those information which depends on A baby.
+* What information should a baby carry?
+  * For example, we want to store those information which depends on A baby.
     * birthAt (*)
     * gender (*)
     * weight (*)
@@ -24,7 +24,7 @@ Before we code anything else about baby, we need to think
 ## Here is the Baby schema
 ```javascript
 {
-  birthAt: "11/04/2024", //  Date Object * but String here for demo purposes
+  birthAt: "11/04/2024", //  Date Object * but String here is for demo purposes.
   gender: '', // String *
   weight: '', // Number *
   name: '', // String
@@ -36,7 +36,7 @@ Before we code anything else about baby, we need to think
 
 ### `POST /api/baby`
 
-We are going to create a baby by this route, and we will storage the information in memory FOR NOW.
+We are going to create a baby in this route, and we will store the information in memory FOR NOW.
 
 So we are going to define a variable to do that, by any line before baby routes add this line
 
@@ -50,7 +50,7 @@ app.post('/api/baby', (req, res) => {
 })
 ```
 
-That it! Then go to Postman to send the baby information to create.
+That's it!  Go to Postman to send the baby information to create.
 
 ![](https://github.com/zackexplosion/Baby-Hospital/blob/main/screenshots/001.jpg?raw=true)
 
@@ -70,7 +70,7 @@ And use Postman to do the request too.
 
 ### WTF? Someone hacked me?
 
-Why a baby can having no gender?
+Why a baby can have no gender?
 
 How can a baby without birthday?
 
