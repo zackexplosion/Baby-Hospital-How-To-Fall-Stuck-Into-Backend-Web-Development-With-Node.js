@@ -1,6 +1,6 @@
 # Connect To Database
 
-Before we connect to database, I want to show more issues that without Database.
+Before we connect to database, I want to show more issues of that without Database.
 
 ```json
 [
@@ -63,7 +63,7 @@ And the baby table in database should looks like this.
 ]
 ```
 
-By this, we will have `_id` to do those actions the I mentioned above.
+By doing this, we will have `_id` to do those actions that I mentioned above.
 
 # MongoDb and Mongoose
 
@@ -99,7 +99,7 @@ const DB_URI  = process.env.DB_URI
 const mongoose = require('mongoose')
 ```
 
-Now I want to make sure we have been establish the connection to database before the app start
+Now I want to make sure we have been established the connection to database before the app start
 
 So change the `app.listen` part like this
 
@@ -113,7 +113,7 @@ mongoose.connect(DB_URI).then(_ => {
 })
 ```
 
-And run the application, it should output like this
+And then run the application, it should output like this
 
 ```
 ➜  Baby-Hospital git:(main) ✗ node backend/index.js
@@ -131,11 +131,11 @@ If you did not see those message, check all steps above.
 
 # Connection Established
 
-After connected to the database, we can rewrite our application now.
+After it has connected to the database, we can rewrite our application now.
 
 First we are going to define a baby model.
 
-You can just put the model definition below the line `const port = 1145`, like...
+You can just put the model definition below the line `const port = 1145`, for example...
 
 ```js
 // DO NOT COPY THIS LINE
@@ -154,7 +154,7 @@ const Baby = mongoose.model(
       weight: { type: Number },
       birthAt: { type: Date},
       /* 
-      We use the new option 'default' here
+      We use the new option 'default' here, 
       which means "If no value is provided, the value define here will be used."
 
       We want every baby create in here mark as NOT deleted.
@@ -204,7 +204,7 @@ app.get('/api/baby', (req, res) => {
 })
 ```
 
-As last route, every operation to database will be asynchronous, do we need to wait for action to finished then do `res.json
+As last route, every operation to database will be asynchronous, we need to wait for action to finished then do `res.json
 
 
 Now we can remove the old "database" by comment out the following line
