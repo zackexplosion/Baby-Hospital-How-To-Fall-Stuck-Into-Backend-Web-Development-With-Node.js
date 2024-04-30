@@ -2,6 +2,7 @@
 
 * Make sure you understand how to do `run the command "npm install"`.
 * Make sure you have installed Node.js on your system.
+  * https://blog.zackexplosion.fun/posts/setup-nodejs-on-barnd-new-mac/
   * https://nodejs.org/en/download
 * Make sure you have any kind of editor which can write code.
   * VsCode ( Which I am using ) https://code.visualstudio.com/ 
