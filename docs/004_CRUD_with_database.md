@@ -2,7 +2,7 @@
 
 
 ## Read action
-Now we heading to the read action, put this part in index.js anyway above `console.log('Connecting to database')`
+Now we are heading to the read action, put this part in index.js anywhere above `console.log('Connecting to database')`
 
 ```js
 app.get('/api/baby/:babyId', async (req, res) => {
@@ -30,9 +30,7 @@ app.get('/api/baby/:babyId', async (req, res) => {
 })
 ```
 
-Test with Postman, you should able to see the results like this.
-
-Which means baby creation successfully.
+Test with Postman, you should be able to see the results like this which means baby creation is a success.
 
 ![](https://github.com/zackexplosion/Baby-Hospital/blob/main/screenshots/006.jpg?raw=true)
 
@@ -46,7 +44,7 @@ So we need to finish the Read action first.
 
 ### But why do we need a update action?
 
-Remember the baby model that we designed before? Some information may not available when we create the baby, so if now we have the information, how to putin to correct baby record?
+Remember the baby model that we designed before? Some information may not be available when we created the baby. So what happend if we have the information just now, and how to update the baby record?
 
 That's what update action does!
 
@@ -76,7 +74,7 @@ app.put('/api/baby/:babyId', async (req, res) => {
 })
 ```
 
-Update action should like this, but you must notice that, we need going to do the same check as create action again, and.... are we going to copy whole check conditions codes to here?
+Update action should be like this, but you must notice that we need going to do the same check as create action again, and.... are we going to copy whole check conditions codes to here?
 
 No....we write another function to wrap every validation condition together.
 
@@ -151,7 +149,7 @@ app.put('/api/baby/:babyId', async (req, res) => {
     }
 
 
-    // If pass the validation, save back to Database.
+    // If it passes the validation, saves back to Database.
     await baby.save()
 
     // Then finish the request.
@@ -184,7 +182,7 @@ app.post('/api/baby', (req, res) => {
 })
 ```
 
-Now we should able to the edit the baby's information.
+Now we should be able to the edit the baby's information.
 
 ![](https://github.com/zackexplosion/Baby-Hospital/blob/main/screenshots/007.jpg?raw=true)
 
