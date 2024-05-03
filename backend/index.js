@@ -3,7 +3,7 @@
 // You even can replace process.env.DB_URI with string.
 // But for now, I want to hide my server from public.
 // So I will inject the DB_URI variable from environment 
-const DB_URI  = process.env.DB_URI
+const DB_URI  = 'mongodb://127.0.0.1:27017/test'
 
 // Dependencies
 const mongoose = require('mongoose')
