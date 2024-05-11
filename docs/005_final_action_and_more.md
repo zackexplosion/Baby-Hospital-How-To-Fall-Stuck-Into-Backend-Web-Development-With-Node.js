@@ -30,13 +30,13 @@ Congratulations! That's all! You finished all the CRUD actions!
 ## What's "More"?
 
 
-We just finished the delete action right?
+We have just finished the delete action, right?
 
-But... what if you find out, there was some records deleted by accident?
+But... what if you find out there were some records deleted by accident?
 
 And we just actually deleted them from Database!
 
-Which means "It's hard to rescue"!
+It means - It's hard to rescue!
 
 Therefore, we are going to add a flag called `markAsDeleted` to our baby model schema.
 
@@ -77,7 +77,7 @@ app.delete('/api/baby/:babyId', async (req, res) => {
       markAsDeleted: true
     })
 
-    // We don't really need to let the client know what were we doing here. Just let them now the record have been deleted.
+    // We don't really need to let the client know what were we doing here. Just let them know that the record have been deleted.
     return res.json({
       message: 'Delete Successfully.'
     })
@@ -93,7 +93,7 @@ app.get('/api/baby', async (req, res) => {
 
   /*
   We want to filter the records by `markAsDeleted: false` 
-  Which means we want the records never been delete yet.
+  which means we want the records never been deleted yet.
   */
   var babyList = await Baby.find({
     markAsDeleted: false
@@ -113,15 +113,15 @@ But.... open the database management tool, you should see.....
 
 The record is not really deleted! It just `markAsDeleted: true`!
 
-Looks familiar right?
+It looks familiar right?
 
 Da! This is how to implement the `Trash Can` function. 😊
 
 ## What's next?
 
-If you are fully understand this chapter, you can go to next Chapter [Business Growing! New Requirement!](./010_business_growing_new_requirements.md)
+If you are fully understood this chapter, you can go to next Chapter [Business Growing! New Requirement!](./010_business_growing_new_requirements.md)
 
-If you have any questions to ask, you can open issue from here
+If you have any questions, you can open issue from here
 https://github.com/zackexplosion/Baby-Hospital-How-To-Fall-Stuck-Into-Backend-Web-Development-With-Node.js/issues/new
 
 ---
