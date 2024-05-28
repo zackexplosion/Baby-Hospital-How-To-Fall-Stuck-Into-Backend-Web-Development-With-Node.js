@@ -1,16 +1,16 @@
 # How To Fall Stuck Into Backend Web Development With Node.js
 
-This is a book design for people who want to learn about backend web applications development with Node.js.
+This book is designed for people who want to learn about backend web application development with Node.js.
 
-In here, I will introduce you some scenarios which happen in the real world.
+Here, I will introduce you to some scenarios that occur in the real world.
 
-By following this guide, you will able to fully understand why we are doing it and What is the purpose of it.
+By following this guide, you will be able to fully understand why we are doing it and the purpose behind it.
 
-And there shall be no more "WTH am I doing right now!?"
+And there will be no more "WTH am I doing right now?!"
 
-We are starting from a very simple example.
+We will start with a very simple example.
 
-Well....No more talking. Let's have some fun!
+Well... No more talking. Let's have some fun!
 
 ## Scenario
 
