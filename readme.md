@@ -14,11 +14,11 @@ Well... No more talking. Let's have some fun!
 
 ## Scenario
 
-You are running a Baby Hospital and you want to have a system that manage all baby's information.
+You are running a Baby Hospital and need a system to manage all the babies's information.
 
-Currently, you are the only one employee and boss.
+Currently, you are the only employee and boss.
 
-So you need do anything all by yourself!
+So you need to do anything everything by yourself!
 
 It means that you are fully responsible for everything that happens in this baby hospital.
 
@@ -26,7 +26,7 @@ And because you are the only one for now, so the system...
 
 * Won't require any authentication FOR NOW.
 * WILL run on your local machine FOR NOW.
-* Those things means the system WILL BE VERY INSECURE FOR NOW.
+* Those things mean the system WILL BE VERY INSECURE FOR NOW.
 * But we will deal with that later.
 
 BTW, You have already hired someone to finish the GUI.
